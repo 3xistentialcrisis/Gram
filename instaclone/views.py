@@ -29,7 +29,7 @@ def signup(request):
 def index(request):
     return render(request, 'instaclone/index.html')
 
-@login_required
+@login_required(login_url='login')
 def profile(request):
     user = request.user
     return render(request, 'instaclone/profile.html',{'user':user})
