@@ -1,7 +1,7 @@
 # Insta-Clone
 ## Author  
   
->[Wanjiku-Karanja](https://github.com/3xistentialcrisis)  
+>[Wanjiku Karanja](https://github.com/3xistentialcrisis)  
   
 # Description  
 This is a Django clone of the photo-sharing application instagram. 
