@@ -98,3 +98,8 @@ body{
 #cog{
     font-size:24px;
 }	
+
+.card-body{
+    margin:0px;
+    padding:0px;
+}

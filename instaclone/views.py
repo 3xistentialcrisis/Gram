@@ -8,7 +8,11 @@ from django.contrib.auth import login, authenticate
 # Create your views here.
 #Index Page
 def index(request):
-    return render(request, 'instaclone/index.html')
+    images = Post.objects.all()
+    params = {
+        'images': images,
+    }
+    return render(request, 'instaclone/index.html',  params)
 
 #Signup Page    
 def signup(request):
