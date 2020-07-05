@@ -7,7 +7,7 @@
 This is a Django clone of the photo-sharing application instagram. 
   
 ##  Live Link  
- Click [View Site](https://gramclone.herokuapp.com/)  to visit the site
+ Click [View Site](https://anothergram.herokuapp.com/)  to visit the site
   
 ## Screenshots 
 ###### Home page
