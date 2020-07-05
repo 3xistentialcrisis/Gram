@@ -1,4 +1,4 @@
-# Insta-Clone
+# Insta Clone
 ## Author  
   
 >[Wanjiku Karanja](https://github.com/3xistentialcrisis)  
