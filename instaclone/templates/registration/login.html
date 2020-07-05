@@ -11,7 +11,7 @@
                 <div class="card-title mt-4">
                     <img src="{% static 'images/insta5.png' %}" alt="" width="40%" class="D-block mx-auto">
                 </div>
-                
+
                 <div class="card-body">
                     <form action="" method="post" novalidate>
                         {% csrf_token%}
@@ -25,6 +25,20 @@
               <div class="card-body">
                 Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
               </div>
+            </div>
+
+            <div container>
+                <p class="text-center mt-4">Get the app</p>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 mb-2">
+                        <img src="{% static 'images/insta2.png' %}" alt="" width="100%">
+                    </div>
+                    <div class="col-md-5 mb-2">
+                        <img src="{% static 'images/insta1.png' %}" alt="" width="100%">
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
             </div>
         </div>
         <div class="col-md-2"></div>
