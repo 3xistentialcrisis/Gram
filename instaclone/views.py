@@ -19,6 +19,6 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-@login_required()
+@login_required(login_url='login')
 def index(request):
     return render(request, 'instaclone/index.html')
