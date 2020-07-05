@@ -39,7 +39,7 @@ h1{
 }
 .instaglyph{
     display: inline-block;
-    background-image: url(/static/images/868a059b8fc8.png);
+    background-image: url(/static/img/868a059b8fc8.png);
     margin: 8px;
 }
 .disc{
@@ -80,7 +80,21 @@ body{
 } 	
 
 .account-img {
-    height: 125px;
-    width: 125px;
+    height: 165px;
+    width: 165px;
     margin-right: 16px;
 }
+
+.modal-body a{
+    text-decoration:none;
+    color:black;
+    text-align:center;
+}	
+
+.username{
+    font-size:30px;
+}
+
+#cog{
+    font-size:24px;
+}	
