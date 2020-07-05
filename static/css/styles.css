@@ -103,3 +103,11 @@ body{
     margin:0px;
     padding:0px;
 }
+
+.user{
+    color:black;
+}
+
+.user a:hover{
+    text-decoration:none;
+}
