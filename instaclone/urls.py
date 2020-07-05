@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'signup/', views.signup, name='signup'),
     url(r'account/', include('django.contrib.auth.urls')),
     url('', views.index, name='index'),
-    url(r'profile/', views.profile, name='profile'),
+    url(r'profile/(?P<username>\w+)/', views.profile, name='profile'),
 ]
 
 if settings.DEBUG:
