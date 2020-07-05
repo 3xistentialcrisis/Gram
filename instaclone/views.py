@@ -30,6 +30,6 @@ def index(request):
     return render(request, 'instaclone/index.html')
 
 @login_required(login_url='login')
-def profile(request):
+def profile(request, username):
     user = request.user
     return render(request, 'instaclone/profile.html',{'user':user})
