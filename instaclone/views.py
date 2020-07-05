@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm
+from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm, PostForm
 from django.contrib.auth import login, authenticate
 
 # Create your views here.
 #Index Page
 def index(request):
     images = Post.objects.all()
+    form = PostForm()
     params = {
         'images': images,
+        'form': form,
     }
     return render(request, 'instaclone/index.html',  params)
 
