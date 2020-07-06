@@ -19,13 +19,14 @@
                         {% csrf_token%}
                         {{ form|crispy}}
                         <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
+                        <input type="hidden" name="next" value="{% url 'instaclone:login' %}" />
                     </form>
                 </div>
                 <a href="" class="D-block mx-auto mb-3">Forgot password? </a>
             </div>
             <div class="card mt-2">
                 <div class="card-body mt-3 mb-3 mr-2 ml-4">
-                    Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+                    Don't have an account? <a href="{% url 'instaclone:signup' %}">Sign up</a>
                 </div>
             </div>
             <div container>

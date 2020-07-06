@@ -13,7 +13,7 @@ from rest_framework import authentication, permissions
 
 # Create your views here.
 #Index Page
-@login_required(login_url='login')
+@login_required(login_url='/accounts/login/')
 def index(request):
     images = Post.objects.all()
     users = User.objects.exclude(id=request.user.id)
@@ -44,13 +44,13 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return render(request, 'instaclone/index.html', {})
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 #Profile
-@login_required(login_url='login')
+@login_required(login_url='/accounts/login/')
 def profile(request, username):
     images = request.user.profile.posts.all()
     if request.method == 'POST':
@@ -72,7 +72,7 @@ def profile(request, username):
     return render(request, 'instaclone/profile.html', params)
 
 #User Profile
-@login_required(login_url='login')
+@login_required(login_url='/accounts/login/')
 def user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
@@ -96,7 +96,7 @@ def user_profile(request, username):
     return render(request, 'instaclone/user_profile.html', params)
 
 #Post Comment
-@login_required(login_url='login')
+@login_required(login_url='/accounts/login/')
 def post_comment(request, id):
     image = get_object_or_404(Post, pk=id)
     is_liked = False
@@ -179,7 +179,7 @@ def like_post(request):
         return JsonResponse({'form': html})
 
 # Search Profile
-@login_required(login_url='login')
+@login_required(login_url='/accounts/login/')
 def search_profile(request):
     if 'search_user' in request.GET and request.GET['search_user']:
         name = request.GET.get("search_user")

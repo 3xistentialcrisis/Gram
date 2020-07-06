@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'instaclone',
     'crispy_forms',
-    'tinymce',
+    'clear_cache',
+    # 'tinymce',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
