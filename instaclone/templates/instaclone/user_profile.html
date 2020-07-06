@@ -16,10 +16,24 @@
                                 <span class="mr-3 text-secondary username">{{ user_prof.username }}</span>
                             </div>
 
-                            <div class="post-details mt-3 mb-3">
+                            {% for follower in followers%}
+                                {% if user == follower.follower.user %}
+                                    <a href="{% url 'unfollow' user_prof.profile.id %}">Unfollow</a>
+                                    <p>{{user_prof.username}}</p>
+                                    {%else%}
+                                    <a href="{% url 'follow' user_prof.profile.id %}">Follow</a>
+                                    {% endif %}
+                                    {% empty %}
+                                        <a href="{% url 'follow' user_prof.profile.id %}">Follow</a>
+                            {% endfor %}
+                            
+                        </div>
+
+                        <div class="post-details mt-3 mb-3">
                                 <span class="mr-5"><strong>{{user_posts.count}}</strong> Posts</span>
                                 <span class="mr-5"> <strong>{{ user_prof.profile.followers.count }}</strong> Followers</span>
-                                <span class="mr-5"> <strong>0</strong> Following</span>
+                                <span class="mr-5"> <strong>{{ user_prof.profile.following.count }}</strong> Following</span>
+                                
                             </div>
                             <h5>{{ user.profile.name }}</h5>
                             <p class="text-secondary">{{ user.profile.bio }}</p>
