@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm, PostForm, CommentForm
 from django.contrib.auth import login, authenticate
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -89,6 +89,7 @@ def post_comment(request, id):
         'image': image,
         'form': form,
         'is_liked': is_liked,
+        'total_likes': image.total_likes()
     }
     return render(request, 'instaclone/single_post.html', params)
 
@@ -102,3 +103,18 @@ def like_post(request):
         image.likes.add(request.user)
         is_liked = False
     return redirect('comment', id=image.id)
+
+@login_required(login_url='login')
+def search_profile(request, name):
+    if 'search' in request.GET and request.GET['search']:
+        name = request.GET.get("search")
+        results = Profile.search_profile(name)
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'results.html', params)
+    else:
+        message = "You haven't searched for any image"
+    return render(request, 'results.html', {'message': message})

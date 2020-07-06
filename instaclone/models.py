@@ -23,6 +23,10 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+    @classmethod
+    def search_profile(cls, name):
+        return cls.objects.filter(user__username__icontains=name).all()
+
 
 class Post(models.Model):
     image = models.ImageField(upload_to='posts/')
@@ -38,7 +42,15 @@ class Post(models.Model):
     def get_all_comments(self):
         return self.comments.all()
     
-     def total_likes(self):
+    @property
+    def save_image(self):
+        self.save()
+
+    @property
+    def delete(self):
+        self.delete()
+    
+    def total_likes(self):
         return self.likes.count()
 
     def __str__(self):
