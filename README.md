@@ -12,14 +12,12 @@ This is a Django clone of the photo-sharing application instagram.
 ## Screenshots 
 ###### Home page
  
-<img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/landingpage.png" width="900px" height="440px">
+<img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/instagram.png" width="900px" height="440px">
  
 
- ###### Images
- <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/gallery.png" width="900px" height="440px">
+ ###### User Profile
+ <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/profile.png" width="900px" height="440px">
 
-  ###### Image Details
- <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/imagedetails.png" width="900px" height="440px">
  
 ## User Story  
 This app enables user to:
