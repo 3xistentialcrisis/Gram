@@ -13,11 +13,11 @@ from rest_framework import authentication, permissions
 
 # Create your views here.
 #Index Page
+@login_required(login_url='login')
 def index(request):
     images = Post.objects.all()
     users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
-
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
@@ -29,13 +29,14 @@ def index(request):
     params = {
         'images': images,
         'form': form,
-        'users': users
+        'users': users,
+
     }
-    return render(request, 'instaclone/index.html',  params)
+    return render(request, 'instaclone/index.html', params)
 
 #Signup Page    
 def signup(request):
-   if request.method == 'POST':
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -44,22 +45,17 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('index')
-        else:
-            form = SignUpForm()
-        return render(request, 'registration/signup.html', {'form': form})
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
 
-@login_required(login_url='login')
-def index(request):
-    return render(request, 'instaclone/index.html')
-
+#Profile
 @login_required(login_url='login')
 def profile(request, username):
     images = request.user.profile.posts.all()
-
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        
         if user_form.is_valid() and prof_form.is_valid():
             user_form.save()
             prof_form.save()
@@ -67,42 +63,42 @@ def profile(request, username):
     else:
         user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
-        # print(images)
     params = {
         'user_form': user_form,
         'prof_form': prof_form,
         'images': images,
+
     }
     return render(request, 'instaclone/profile.html', params)
 
+#User Profile
 @login_required(login_url='login')
 def user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
         return redirect('profile', username=request.user.username)
     user_posts = user_prof.profile.posts.all()
+    
     followers = Follow.objects.filter(followed=user_prof.profile)
-
     follow_status = None
     for follower in followers:
         if request.user.profile == follower.follower:
             follow_status = True
         else:
             follow_status = False
-
     params = {
         'user_prof': user_prof,
         'user_posts': user_posts,
-        'followers': followers,
         'followers': followers,
         'follow_status': follow_status
     }
     print(followers)
     return render(request, 'instaclone/user_profile.html', params)
 
+#Post Comment
 @login_required(login_url='login')
 def post_comment(request, id):
-    # form = CommentForm()
+    image = get_object_or_404(Post, pk=id)
     is_liked = False
     if image.likes.filter(id=request.user.id).exists():
         is_liked = True
@@ -142,7 +138,6 @@ class PostLikeAPIToggle(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, id=None, format=None):
-        # id = self.kwargs.get('id')
         obj = get_object_or_404(Post, pk=id)
         url_ = obj.get_absolute_url()
         user = self.request.user
@@ -163,7 +158,7 @@ class PostLikeAPIToggle(APIView):
         print(data)
         return Response(data)
 
-
+#Like Post
 def like_post(request):
     image = get_object_or_404(Post, id=request.POST.get('id'))
     is_liked = False
@@ -182,15 +177,14 @@ def like_post(request):
     if request.is_ajax():
         html = render_to_string('instaclone/like_section.html', params, request=request)
         return JsonResponse({'form': html})
-    
 
+# Search Profile
 @login_required(login_url='login')
 def search_profile(request):
     if 'search_user' in request.GET and request.GET['search_user']:
         name = request.GET.get("search_user")
         results = Profile.search_profile(name)
         print(results)
-
         message = f'name'
         params = {
             'results': results,
@@ -198,16 +192,10 @@ def search_profile(request):
         }
         return render(request, 'instaclone/results.html', params)
     else:
-        message = "You haven't searched for any image"
+        message = "You have not searched for an Image "
     return render(request, 'instaclone/results.html', {'message': message})
 
-def unfollow(request, to_unfollow):
-    if request.method == 'GET':
-        user_profile2 = Profile.objects.get(pk=to_unfollow)
-        unfollow_d = Follow.objects.filter(follower=request.user.profile, followed=user_profile2)
-        unfollow_d.delete()
-        return redirect('user_profile', user_profile2.user.username)
-
+#Follow User
 def follow(request, to_follow):
     if request.method == 'GET':
         user_profile3 = Profile.objects.get(pk=to_follow)
@@ -215,10 +203,11 @@ def follow(request, to_follow):
         follow_s.save()
         return redirect('user_profile', user_profile3.user.username)
 
+#Unfollow User
+def unfollow(request, to_unfollow):
+    if request.method == 'GET':
+        user_profile2 = Profile.objects.get(pk=to_unfollow)
+        unfollow_d = Follow.objects.filter(follower=request.user.profile, followed=user_profile2)
+        unfollow_d.delete()
+        return redirect('user_profile', user_profile2.user.username)
 
-@login_required(login_url='/accounts/login/')
-def togglefollow(request, user_id):
-    target = get_object_or_404(User, pk=user_id).profile
-    request.user.profile.togglefollow(target)
-    response = [target.followers.count(), target.following.count()]
-    return JsonResponse(response, safe=False)
