@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'instaclone',
     'crispy_forms',
-    'clear_cache',
+    # 'clear_cache',
     # 'tinymce',
 ]
 
