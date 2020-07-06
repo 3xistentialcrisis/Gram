@@ -12,6 +12,7 @@ urlpatterns = [
     url('', views.index, name='index'),
     url(r'profile/<username>/', views.profile, name='profile'),
     url(r'post/<id>', views.post_comment, name='comment'),
+    url(r'like', views.like_post, name='like_post'),
 ]
 
 if settings.DEBUG:

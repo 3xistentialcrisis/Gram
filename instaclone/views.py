@@ -88,5 +88,17 @@ def post_comment(request, id):
     params = {
         'image': image,
         'form': form,
+        'is_liked': is_liked,
     }
     return render(request, 'instaclone/single_post.html', params)
+
+def like_post(request):
+    image = get_object_or_404(Post, id=request.POST.get('image_id'))
+    is_liked = False
+    if image.likes.filter(id=request.user.id).exists():
+        image.likes.remove(request.user)
+        is_liked = False
+    else:
+        image.likes.add(request.user)
+        is_liked = False
+    return redirect('comment', id=image.id)
