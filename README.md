@@ -14,8 +14,10 @@ This is a Django clone of the photo-sharing application instagram.
  
 <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/instagram.png" width="900px" height="440px">
  
+###### Sign Up
+ <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/signup.png" width="900px" height="440px">
 
- ###### User Profile
+###### User Profile
  <img src="https://raw.githubusercontent.com/3xistentialcrisis/Gram/master/static/images/profile.png" width="900px" height="440px">
 
  
