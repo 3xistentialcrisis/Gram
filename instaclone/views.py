@@ -66,3 +66,7 @@ def profile(request, username):
         'prof_form': prof_form,
     }
     return render(request, 'instaclone/profile.html', params)
+
+@login_required(login_url='login')
+def post_comment(request, id):
+    return redirect('instaclone/single_post.html')
