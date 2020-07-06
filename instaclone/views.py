@@ -72,6 +72,19 @@ def profile(request, username):
     return render(request, 'instaclone/profile.html', params)
 
 @login_required(login_url='login')
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile', username=request.user.username)
+    user_posts = user_prof.profile.posts.all()
+
+    params = {
+        'user_prof': user_prof,
+        'user_posts': user_posts
+    }
+    return render(request, 'instaclone/user_profile.html', params)
+
+@login_required(login_url='login')
 def post_comment(request, id):
     # form = CommentForm()
     image = get_object_or_404(Post, pk=id)
@@ -105,16 +118,18 @@ def like_post(request):
     return redirect('comment', id=image.id)
 
 @login_required(login_url='login')
-def search_profile(request, name):
-    if 'search' in request.GET and request.GET['search']:
-        name = request.GET.get("search")
+def search_profile(request):
+    if 'search_user' in request.GET and request.GET['search_user']:
+        name = request.GET.get("search_user")
         results = Profile.search_profile(name)
+        print(results)
+
         message = f'name'
         params = {
             'results': results,
             'message': message
         }
-        return render(request, 'results.html', params)
+        return render(request, 'instaclone/results.html', params)
     else:
         message = "You haven't searched for any image"
-    return render(request, 'results.html', {'message': message})
+    return render(request, 'instaclone/results.html', {'message': message})
