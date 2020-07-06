@@ -83,10 +83,19 @@ def user_profile(request, username):
     user_posts = user_prof.profile.posts.all()
     followers = Follow.objects.filter(followed=user_prof.profile)
 
+    follow_status = None
+    for follower in followers:
+        if request.user.profile == follower.follower:
+            follow_status = True
+        else:
+            follow_status = False
+
     params = {
         'user_prof': user_prof,
-        'user_posts': user_posts
-        'followers': followers
+        'user_posts': user_posts,
+        'followers': followers,
+        'followers': followers,
+        'follow_status': follow_status
     }
     print(followers)
     return render(request, 'instaclone/user_profile.html', params)

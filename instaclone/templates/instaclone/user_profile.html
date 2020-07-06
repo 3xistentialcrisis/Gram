@@ -16,17 +16,15 @@
                                 <span class="mr-3 text-secondary username">{{ user_prof.username }}</span>
                             </div>
 
-                            {% for follower in followers%}
-                                {% if user == follower.follower.user %}
+                            {% if follow_status %}
+                                
                                 <a class="btn btn-sm btn-outline-danger ml-5" href="{% url 'unfollow' user_prof.profile.id %}">Unfollow</a>
                                     
                                 {%else%}
                                 <a class="btn btn-sm btn-primary ml-5" href="{% url 'follow' user_prof.profile.id %}">Follow</a>
                                    
-                                {% endif %}
-                                {% empty %}
+                            {% endif %}
                                     
-                            {% endfor %}     
                         </div>
 
                         <div class="post-details mt-3 mb-3">
@@ -46,8 +44,15 @@
     <div class="card-columns">
         {% for image in user_posts %}
             <div class="card">
-                <div class="card-body">
+                <div class="card-body parent ">
+                    <div class="im">
                     <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img">
+                    <p id="overlay"class="text"> 
+                            <i class="fas fa-heart" style="color:white; font-size: 18"></i> 
+                            <span style="color: white">{{image.likes.count}}</span>
+                             <i class="fas fa-comment ml-4" style="color: white"></i> <span style="color: white">{{image.comments.count}}</span></p>
+        
+                    </div>
                 </div>
             </div>
         {% endfor %}
