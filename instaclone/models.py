@@ -56,6 +56,9 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.user.name} Post'
 
+    class Meta:
+        ordering = ["-pk"]
+
 class Comment(models.Model):
     comment = models.TextField()
     text = models.TextField()
@@ -63,8 +66,11 @@ class Comment(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
-        return f'{self.user.name} Post
+        return f'{self.user.name} Post'
 
-class Likes(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_likes')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_likes')
+class Follow(models.Model):
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'

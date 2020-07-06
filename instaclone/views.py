@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm, PostForm, CommentForm
@@ -63,7 +63,7 @@ def profile(request, username):
     else:
         user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
-        print(images)
+        # print(images)
     params = {
         'user_form': user_form,
         'prof_form': prof_form,
@@ -133,3 +133,10 @@ def search_profile(request):
     else:
         message = "You haven't searched for any image"
     return render(request, 'instaclone/results.html', {'message': message})
+
+@login_required(login_url='/accounts/login/')
+def togglefollow(request, user_id):
+    target = get_object_or_404(User, pk=user_id).profile
+    request.user.profile.togglefollow(target)
+    response = [target.followers.count(), target.following.count()]
+    return JsonResponse(response, safe=False)

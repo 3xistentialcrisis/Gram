@@ -129,3 +129,14 @@ body{
 .col-form-label{
     font-size:14;
 }
+
+.hearticon{
+    color:black;
+    font-size:30px;
+    margin-left:-10px;
+    margin-right:-10px;
+}
+.viewall a{
+    text-decoration:none;
+    color:grey;
+}
