@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'account/', include('django.contrib.auth.urls')),
     url('', views.index, name='index'),
     url(r'profile/<username>/', views.profile, name='profile'),
+    url(r'post/<id>', views.post_comment, name='comment'),
 ]
 
 if settings.DEBUG:

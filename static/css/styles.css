@@ -126,3 +126,6 @@ body{
 .userinfo{
     margin-top:24px;
 }
+.col-form-label{
+    font-size:14;
+}
