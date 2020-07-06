@@ -14,7 +14,7 @@
                     <img src="{% static 'images/insta5.png' %}" alt="" width="40%" class="D-block mx-auto">
                 </div>
 
-                <div class="card-body">
+                <div class="card-body mb-3 mr-3 ml-3">
                     <form action="" method="post" novalidate>
                         {% csrf_token%}
                         {{ form|crispy }}
@@ -24,7 +24,7 @@
               <a href="" class="D-block mx-auto mb-2">Forgot password? </a>
             </div>
             <div class="card mt-2">
-              <div class="card-body">
+              <div class="card-body mt-3 mb-3 mr-2 ml-4">
                 Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
               </div>
             </div>

@@ -4,11 +4,14 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm, PostForm
 from django.contrib.auth import login, authenticate
+from .models import Post
+from django.contrib.auth.models import User
 
 # Create your views here.
 #Index Page
 def index(request):
     images = Post.objects.all()
+    users = User.objects.all()
     if request.method == 'POST':
 
         form = PostForm(request.POST, request.FILES)
@@ -22,6 +25,7 @@ def index(request):
     params = {
         'images': images,
         'form': form,
+        'users': users
     }
     return render(request, 'instaclone/index.html',  params)
 
@@ -36,9 +40,9 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('index')
-    else:
-        form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+        else:
+            form = SignUpForm()
+        return render(request, 'registration/signup.html', {'form': form})
 
 @login_required(login_url='login')
 def index(request):
