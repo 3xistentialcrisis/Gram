@@ -96,7 +96,7 @@ def user_profile(request, username):
 def post_comment(request, id):
     # form = CommentForm()
     image = get_object_or_404(Post, pk=id)
-    if request.method == 'Post':
+    if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             savecomment = form.save(commit=False)
