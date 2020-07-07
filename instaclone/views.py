@@ -10,6 +10,7 @@ from django.views.generic import RedirectView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+# from .email import send_welcome_email
 
 # Create your views here.
 #Index Page
@@ -212,3 +213,24 @@ def unfollow(request, to_unfollow):
         unfollow_d.delete()
         return redirect('user_profile', user_profile2.user.username)
 
+#Email
+# def email(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             name = form.cleaned_data['your_name']
+#             email = form.cleaned_data['email']
+
+#             recipient = User(name = name,email =email)
+#             recipient.save()
+#             send_welcome_email(name,email)
+
+#             HttpResponseRedirect('email')
+
+#     #     params = {
+#     #     'user_prof': user_prof,
+#     #     'user_posts': user_posts,
+#     #     'followers': followers,
+#     #     'follow_status': follow_status
+#     # }
+#     return render(request, 'instaclone/user_profile.html')
