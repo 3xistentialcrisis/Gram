@@ -46,7 +46,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             # return redirect('index')
-            return render(request, 'index.html', {'form': form})
+            return render(request, 'instaclone/index.html', {'form': form})
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
