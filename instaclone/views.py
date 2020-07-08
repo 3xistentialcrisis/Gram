@@ -15,46 +15,24 @@ from rest_framework import authentication, permissions
 # Create your views here.
 #Index Page
 @login_required(login_url='/accounts/login/')
-# def index(request):
-#     images = Post.objects.all()
-#     users = User.objects.exclude(id=request.user.id)
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.user = request.user.profile
-#             post.save()
-#             return HttpResponseRedirect(request.path_info)
-#     else:
-#         form = PostForm()
-#     params = {
-#         'images': images,
-#         'form': form,
-#         'users': users,
-
-#     }
-#     return render(request, 'registration/login.html')
-
 def index(request):
-    # images = Post.objects.all()
-    # users = User.objects.exclude(id=request.user.id)
+    images = Post.objects.all()
+    users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
-        form = LogInForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index.html')
+            post = form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
+            return HttpResponseRedirect(request.path_info)
     else:
-        form = SignUpForm()
-    # params = {
-    #     'images': images,
-    #     'form': form,
-    #     'users': users,
+        form = PostForm()
+    params = {
+        'images': images,
+        'form': form,
+        'users': users,
 
-    # }
+    }
     return render(request, 'registration/login.html')
 
 #Signup Page    
