@@ -9,7 +9,7 @@ from django.contrib.auth import views as auth_views
 app_name = 'instaclone'
 
 urlpatterns = [
-    url(r'instaclone/', views.index, name='index'),
+    url('^$', views.index, name='index'),
     url(r'signup/', views.signup, name='signup'),
     # url(r'login/', views.login, name='login'),
     url(r'accounts/login/', auth_views.LoginView.as_view()),
