@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'api/post/(?P<id>/like.+)$', PostLikeAPIToggle.as_view(), name='liked-api'),
     url(r'like', views.like_post, name='like_post'),
     url(r'search/', views.search_profile, name='search'),
-    url(r'unfollow/<to_unfollow>', views.unfollow, name='unfollow'),
+    url(r'unfollow/(?P<to_unfollow>.+)?$', views.unfollow, name='unfollow'),
     url(r'follow/<to_follow>', views.follow, name='follow'),
 ]
 

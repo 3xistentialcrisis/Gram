@@ -12,12 +12,13 @@
             </form>
             <span class="pull-right">
                 <div class="instaicon disc"></div>
-                <div class="instaicon like"></div>           
+                <div class="instaicon like"></div>     
+                <a href="{% url 'instaclone:profile' user.username %}" class="instaicon pers"></a>      
             </span>
-            <br>
+            <!-- <br>
             <br>
             <span class="pull-right">
                 <a href="{% url 'instaclone:signup' %}">Sign up</a>          
-            </span>
+            </span> -->
         </nav>
     </div
