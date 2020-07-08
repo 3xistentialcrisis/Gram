@@ -36,8 +36,8 @@ from rest_framework import authentication, permissions
 #     return render(request, 'registration/login.html')
 
 def index(request):
-    images = Post.objects.all()
-    users = User.objects.exclude(id=request.user.id)
+    # images = Post.objects.all()
+    # users = User.objects.exclude(id=request.user.id)
     if request.method == 'POST':
         form = LogInForm(request.POST, request.FILES)
         if form.is_valid():
