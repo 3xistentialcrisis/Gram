@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm,UpdateUserForm, UpdateUserProfileForm, PostForm, CommentForm
 from django.contrib.auth import login, authenticate
