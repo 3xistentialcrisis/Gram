@@ -10,7 +10,7 @@ app_name = 'instaclone'
 
 urlpatterns = [
     url('^$', views.index, name='index'),
-    url(r'signup/$', views.signup, name='signup'),
+    url(r'signup/', views.signup, name='signup'),
     # url(r'login/', views.login, name='login'),
     url(r'accounts/login/', auth_views.LoginView.as_view()),
     url(r'account/', include('django.contrib.auth.urls')),
