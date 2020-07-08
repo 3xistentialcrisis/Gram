@@ -33,7 +33,7 @@ def index(request):
         'users': users,
 
     }
-    return render(request, 'index.html', params)
+    return render(request, 'instaclone/index.html', params)
 
 #Signup Page    
 def signup(request):
@@ -46,7 +46,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('index.html')
-           
+            # return render(request, 'instaclone/index.html', {'form': form})
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
