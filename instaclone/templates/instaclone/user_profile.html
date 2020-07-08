@@ -18,10 +18,10 @@
 
                             {% if follow_status %}
                                 
-                                <a class="btn btn-sm btn-outline-danger ml-5" href="{% url 'unfollow' user_prof.profile.id %}">Unfollow</a>
+                                <a class="btn btn-sm btn-outline-danger ml-5" href="{% url 'instaclone:unfollow' user_prof.profile.id %}">Unfollow</a>
                                     
                                 {%else%}
-                                <a class="btn btn-sm btn-primary ml-5" href="{% url 'follow' user_prof.profile.id %}">Follow</a>
+                                <a class="btn btn-sm btn-primary ml-5" href="{% url 'instaclone:follow' user_prof.profile.id %}">Follow</a>
                                    
                             {% endif %}
                                     

@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'accounts/login/', auth_views.LoginView.as_view()),
     url(r'account/', include('django.contrib.auth.urls')),
     url(r'profile/(?P<username>pattern)', views.profile, name='profile'),
-    url(r'user_profile/(?P<username>pattern)', views.user_profile, name='user_profile'), 
+    url(r'user_profile/(?P<username>.+)/foo$', views.user_profile, name='user_profile'), 
     url(r'post/<id>', views.post_comment, name='comment'),
     url(r'post/<id>/like', PostLikeToggle.as_view(), name='liked'),
     url(r'api/post/<id>/like', PostLikeAPIToggle.as_view(), name='liked-api'),
