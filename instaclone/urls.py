@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url, include,path
 from . import views
 from instaclone.views import PostLikeToggle, PostLikeAPIToggle
 from django.conf.urls.static import static
@@ -9,10 +9,11 @@ from django.contrib.auth import views as auth_views
 app_name = 'instaclone'
 
 urlpatterns = [
-    url('^$', views.index, name='index'),
+    path('', views.index, name='index'),
+    # url('^$', views.index, name='index'),
     url(r'signup/', views.signup, name='signup'),
     # url(r'login/', views.login, name='login'),
-    # url(r'accounts/login/', auth_views.LoginView.as_view()),
+    url(r'accounts/login/', auth_views.LoginView.as_view()),
     url(r'account/', include('django.contrib.auth.urls')),
     url(r'profile/(?P<username>pattern)', views.profile, name='profile'),
     url(r'user_profile/<username>/', views.user_profile, name='user_profile'),
