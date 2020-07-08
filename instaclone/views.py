@@ -33,7 +33,7 @@ def index(request):
         'users': users,
 
     }
-    return render(request, 'instaclone/index.html')
+    return render(request, 'instaclone/index.html', params)
 
 #Signup Page    
 def signup(request):
