@@ -33,7 +33,7 @@ def index(request):
         'users': users,
 
     }
-    return render(request, 'registration/login.html')
+    return render(request, 'index.html')
 
 #Signup Page    
 def signup(request):
